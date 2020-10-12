@@ -23,7 +23,8 @@ public class EchoServer  {
     			new InputStreamReader(clientSocket.getInputStream()));    
     		PrintStream socOut = new PrintStream(clientSocket.getOutputStream());
     		while (true) {
-    		  String line = socIn.readLine();
+			  String line = socIn.readLine();
+			  System.out.println(line);
     		  socOut.println(line);
     		}
     	} catch (Exception e) {
