@@ -47,11 +47,13 @@ public class EchoClient {
         }
                              
         String line;
+        ClientListener cl = new ClientListener(echoSocket);
+        cl.start();
         while (true) {
         	line=stdIn.readLine();
-        	if (line.equals(".")) break;
-        	socOut.println(line);
-        	System.out.println("echo: " + socIn.readLine());
+          if (line.equals(".")) break;
+          socOut.println(line);
+        	//System.out.println("echo: " + socIn.readLine());
         }
       socOut.close();
       socIn.close();
