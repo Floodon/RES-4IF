@@ -52,8 +52,18 @@ public class WebServer {
         // blank line signals the end of the client HTTP
         // headers.
         String str = ".";
-        while (str != null && !str.equals(""))
+        String request = "";
+        while (str != null && !str.equals("")) {
           str = in.readLine();
+          request += str+"\n";
+        }
+
+
+        // Parse the request
+
+        HttpStructure http = parseRequest(request);
+
+
 
         // Send the response
         // Send the headers
@@ -70,6 +80,15 @@ public class WebServer {
         System.out.println("Error: " + e);
       }
     }
+  }
+
+  public HttpStructure parseRequest(String request) {
+    String[] splited = request.split(" ");
+    HttpStructure http = new HttpStructure();
+    http.requestType = splited[0];
+    http.ressourceRequested = splited[1];
+    http.protocolVersion = splited[2];
+    return http;
   }
 
   /**

@@ -2,6 +2,8 @@ package http.client;
 
 import java.net.InetAddress;
 import java.net.Socket;
+import java.io.*;
+import java.net.*;
 
 public class WebPing {
   public static void main(String[] args) {
@@ -17,9 +19,12 @@ public class WebPing {
       httpServerPort = Integer.parseInt(args[1]);
 
     try {
-      InetAddress addr;      Socket sock = new Socket(httpServerHost, httpServerPort);
+      InetAddress addr;      
+      Socket sock = new Socket(httpServerHost, httpServerPort);
+      PrintStream socOut = new PrintStream(sock.getOutputStream());
       addr = sock.getInetAddress();
       System.out.println("Connected to " + addr);
+      socOut.println("GET /index HTTP/1.1\nHost: example.com\n");
       sock.close();
     } catch (java.io.IOException e) {
       System.out.println("Can't connect to " + httpServerHost + ":" + httpServerPort);
