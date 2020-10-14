@@ -9,6 +9,7 @@ package stream;
 
 
 import java.net.*;
+import java.io.*;
 
 public class MultiServer {
   
@@ -26,16 +27,20 @@ public class MultiServer {
   	}
 	try {
 
-		listenSocket = new ServerSocket(Integer.parseInt(args[0])); //port
+		listenSocket = new ServerSocket(Integer.parseInt(args[0])); //port   
 		System.out.println("Server ready..."); 
 		while (true) {
 			Socket clientSocket = listenSocket.accept();
+			BufferedReader socIn = new BufferedReader( new InputStreamReader(clientSocket.getInputStream()));    
+			String pseudo = socIn.readLine();
 			System.out.println("Connexion from:" + clientSocket.getInetAddress());
-			MultiClient ct = new MultiClient(clientSocket);
+			MultiClient ct = new MultiClient(clientSocket,pseudo);
 			ct.start();
 		}
         } catch (Exception e) {
-            System.err.println("Error in EchoServer:" + e);
+            if(e.isInstanceOf(SocketException)) {
+				
+			}
         }
       }
   }

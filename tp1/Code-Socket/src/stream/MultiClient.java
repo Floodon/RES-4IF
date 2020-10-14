@@ -15,9 +15,11 @@ public class MultiClient
 	extends Thread {
 	public static List<PrintStream> liste_clients = Collections.synchronizedList(new ArrayList<PrintStream>());
 	private Socket clientSocket;
+	private String pseudo;
 	
-	MultiClient(Socket s) {
+	MultiClient(Socket s, String pseudo) {
 		this.clientSocket = s;
+		this.pseudo = pseudo;
 	}
 
  	/**
@@ -33,17 +35,27 @@ public class MultiClient
     			new InputStreamReader(clientSocket.getInputStream()));    
 			PrintStream socOut = new PrintStream(clientSocket.getOutputStream());
 			liste_clients.add(socOut);
-			System.out.println(liste_clients.size());
+
+			//Affiche à tous le monde la connexion d'un nouvel utilisateur
+			for(int i=0;i<liste_clients.size();i++) {
+				liste_clients.get(i).println(pseudo+" s'est connecté !");
+				
+			  }
 
     		while (true) {
 				  String line = socIn.readLine();
+				  if(line == null) {
+					  for(int i=0;i<liste_clients.size();i++) {
+						liste_clients.get(i).println(pseudo+" s'est déconnecté !");
+					  }
+					  break;
+				  }
 				for(int i=0;i<liste_clients.size();i++) {
-					liste_clients.get(i).println(line);
+					liste_clients.get(i).println(pseudo+":"+line);
 					
 			  	}
     		}
     	} catch (Exception e) {
-        	System.err.println("Error in EchoServer:" + e); 
         }
        }
   }

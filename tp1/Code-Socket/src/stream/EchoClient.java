@@ -8,6 +8,7 @@ package stream;
 
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 
 
@@ -31,12 +32,18 @@ public class EchoClient {
         }
 
         try {
+          System.out.print("Pseudo: ");
+          Scanner reader = new Scanner(System.in);
+          String pseudo = reader.nextLine();
+
       	    // creation socket ==> connexion
       	    echoSocket = new Socket(args[0], Integer.valueOf(args[1]).intValue());
 	    socIn = new BufferedReader(
 	    		          new InputStreamReader(echoSocket.getInputStream()));    
 	    socOut= new PrintStream(echoSocket.getOutputStream());
-	    stdIn = new BufferedReader(new InputStreamReader(System.in));
+      stdIn = new BufferedReader(new InputStreamReader(System.in));
+      System.out.println("Succesfully connected as "+pseudo);
+      socOut.println(pseudo);
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host:" + args[0]);
             System.exit(1);
@@ -49,6 +56,8 @@ public class EchoClient {
         String line;
         ClientListener cl = new ClientListener(echoSocket);
         cl.start();
+
+
         while (true) {
         	line=stdIn.readLine();
           if (line.equals(".")) break;

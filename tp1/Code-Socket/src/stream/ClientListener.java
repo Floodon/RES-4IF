@@ -23,11 +23,11 @@ public class ClientListener
     			new InputStreamReader(clientSocket.getInputStream()));    
             
     		while (true) {
-			  	String line = socIn.readLine();
-                System.out.println("Message: "+line);
+				String line = socIn.readLine();
+				System.out.println(line);
+				
     		}
-    	} catch (Exception e) {
-        	System.err.println("Error in EchoServer:" + e); 
+    	} catch (Exception e) {; 
         }
        }
   }
