@@ -62,6 +62,9 @@ public class WebServer {
         // Parse the request
 
         HttpStructure http = parseRequest(request);
+        if(http.requestType == "GET") {
+          getRespond(http);
+        }
 
 
 
@@ -90,6 +93,13 @@ public class WebServer {
     http.protocolVersion = splited[2];
     return http;
   }
+
+  public String GetRespond(HttpStructure http) {
+    String response
+    
+    
+    return response;
+  } 
 
   /**
    * Start the application.
