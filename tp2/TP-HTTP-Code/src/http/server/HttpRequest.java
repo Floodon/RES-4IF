@@ -6,5 +6,5 @@ public class HttpRequest {
     public String protocolVersion;
     public String requestHeaderField;
     public String messageBody;
-    HttpStructure() {}
+    public HttpRequest() {}
 }
