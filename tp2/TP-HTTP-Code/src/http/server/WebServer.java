@@ -61,9 +61,9 @@ public class WebServer {
 
         // Parse the request
 
-        HttpStructure http = parseRequest(request);
+        HttpRequest http = parseRequest(request);
         if(http.requestType == "GET") {
-          getRespond(http);
+          GetRespond(http);
         }
 
 
@@ -85,18 +85,25 @@ public class WebServer {
     }
   }
 
-  public HttpStructure parseRequest(String request) {
+  public HttpRequest parseRequest(String request) {
     String[] splited = request.split(" ");
-    HttpStructure http = new HttpStructure();
+    HttpRequest http = new HttpRequest();
     http.requestType = splited[0];
     http.ressourceRequested = splited[1];
     http.protocolVersion = splited[2];
     return http;
   }
 
-  public String GetRespond(HttpStructure http) {
-    String response
-    
+  public String GetRespond(HttpRequest http) {
+    String response = "";
+    HttpResponse response = new HttpResponse();
+    if(http.ressourceRequested == "index.html"){
+      response.protocolVersion = http.protocolVersion;
+      response.code = "200";
+      response.codeSignification = "OK";
+      response.body = "<HTML>
+      </HTML>"
+    }
     
     return response;
   } 
