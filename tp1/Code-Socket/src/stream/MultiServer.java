@@ -10,6 +10,7 @@ package stream;
 
 import java.net.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class MultiServer {
   
@@ -26,6 +27,10 @@ public class MultiServer {
           System.exit(1);
   	}
 	try {
+		//Créé fichier de persistence du chat s'il n'existe pas
+		//BufferedWriter est synchronized !
+		BufferedWriter file_writer = new BufferedWriter(new FileWriter("./bin/historique.log"));
+      	Scanner file_reader = new Scanner(new File("./bin/historique.log"));
 
 		listenSocket = new ServerSocket(Integer.parseInt(args[0])); //port   
 		System.out.println("Server ready..."); 
@@ -34,13 +39,12 @@ public class MultiServer {
 			BufferedReader socIn = new BufferedReader( new InputStreamReader(clientSocket.getInputStream()));    
 			String pseudo = socIn.readLine();
 			System.out.println("Connexion from:" + clientSocket.getInetAddress());
-			MultiClient ct = new MultiClient(clientSocket,pseudo);
+			MultiClient ct = new MultiClient(clientSocket,pseudo,file_writer,file_reader);
 			ct.start();
 		}
         } catch (Exception e) {
-            if(e.isInstanceOf(SocketException)) {
-				
-			}
+			//fos.flush();
+			//fos.close();
         }
       }
   }

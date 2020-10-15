@@ -27,7 +27,7 @@ public class ClientListener
 				System.out.println(line);
 				
     		}
-    	} catch (Exception e) {; 
+    	} catch (Exception e) {
         }
        }
   }
