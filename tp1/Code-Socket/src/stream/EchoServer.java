@@ -28,7 +28,8 @@ public class EchoServer  {
     		  socOut.println(line);
     		}
     	} catch (Exception e) {
-        	System.err.println("Error in EchoServer:" + e); 
+			System.err.println("Error in EchoServer:" + e); 
+			e.printStackTrace();
         }
        }
   
@@ -52,7 +53,8 @@ public class EchoServer  {
 			doService(clientSocket);
 		}
         } catch (Exception e) {
-            System.err.println("Error in EchoServer:" + e);
+			System.err.println("Error in EchoServer:" + e);
+			e.printStackTrace();
         }
       }
   }

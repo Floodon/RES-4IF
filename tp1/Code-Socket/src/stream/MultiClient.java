@@ -19,11 +19,15 @@ public class MultiClient
 	private BufferedWriter file_writer;
 	private Scanner file_reader;
 	
-	MultiClient(Socket s, String pseudo, BufferedWriter file_writer, Scanner file_reader) {
+	MultiClient(Socket s, String pseudo, File histo) {
 		this.clientSocket = s;
 		this.pseudo = pseudo;
-		this.file_writer = file_writer;
-		this.file_reader = file_reader;
+		try{
+			this.file_writer = new BufferedWriter(new FileWriter(histo, true));
+			this.file_reader = new Scanner(histo);
+		} catch(Exception e) { 
+			e.printStackTrace();
+		}
 	}
 
  	/**
@@ -43,7 +47,7 @@ public class MultiClient
 			//Restitue l'historique du chat
 			while (file_reader.hasNextLine()) {
 				String data = file_reader.nextLine();
-				System.out.println(data);
+				socOut.println(data);
 			  }
 
 			//Affiche à tous le monde la connexion d'un nouvel utilisateur
@@ -74,17 +78,22 @@ public class MultiClient
 				for(int i=0;i<liste_clients.size();i++) {
 					liste_clients.get(i).println(to_send);
 			  	}
-    		}
+			}
+			file_writer.close();
+			file_reader.close();
     	} catch (Exception e) {
+			e.printStackTrace();
         }
 	   }
 	   
 	   public void sauvegarder(String to_save) {
 		try {
 			to_save += "\n";
-			file_writer.write(to_save);
+			file_writer.append(to_save);
+			file_writer.flush();
 		} catch (Exception e) {
 			System.out.println("couldn't save your message");
+			e.printStackTrace();
 		}
 	   }
   }
