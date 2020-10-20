@@ -15,4 +15,4 @@ run_client:
 	$(JCR) $(JCROPT) classes stream.EchoClient $(host) $(port)
 
 clean: 
-	$(RM) classes/*.class *~ 
+	$(RM) classes/*/*.class *~ 

@@ -1,15 +1,19 @@
-/***
- * EchoClient
- * Example of a TCP client 
- * Date: 10/01/04
- * Authors:
- */
 package stream;
-
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
+
+/**
+ * Exemple d'un client supportant un chat utilisant des connexions de type TCP
+ * 
+ *  EchoCLient est le client de base à lancer pour se connecter au chat
+ *  celui-ci demande un host ainsi qu'un numéro de port
+ *  
+ * 
+ * @author Boscher Enzo, Bonhomme Alexandre
+ * @version 1.0
+ */
 
 
 public class EchoClient {
@@ -17,7 +21,13 @@ public class EchoClient {
  
   /**
   *  main method
-  *  accepts a connection, receives a message from client then sends an echo to the client
+  *  Client permettant de se connecter au chat, celui-ci prend en argument un host et un
+  *  port. Le client demande à l'utilisateur son pseudo, lance le thread ClientListener
+  *  et se met en attente d'entrées sur la sortie standard, les envoyant immédiatement au 
+  *  serveur.
+  * 
+  *  @param host Adresse IPv4 du serveur: donner localhost en cas de connexion locale
+  *  @param port Port du serveur
   **/
     public static void main(String[] args) throws IOException {
 
@@ -27,7 +37,7 @@ public class EchoClient {
         BufferedReader socIn = null;
 
         if (args.length != 2) {
-          System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>");
+          System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>\nif using make: make run_client host=<host> port=<port>");
           System.exit(1);
         }
 
@@ -64,7 +74,6 @@ public class EchoClient {
         	line=stdIn.readLine();
           if (line.equals(".")) break;
           socOut.println(line);
-        	//System.out.println("echo: " + socIn.readLine());
         }
       socOut.close();
       socIn.close();

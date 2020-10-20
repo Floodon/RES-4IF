@@ -2,11 +2,45 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+/**
+ * Exemple d'un client supportant un chat utilisant des connexions de type UDP
+ * 
+ * Le multicast permet de ne pas avoir besoin de serveur, en effet chaque utilisateur
+ * "abonné" à l'adresse multicast donnée peut envoyée et recevra les messages envoyés
+ * par les autres "abonnés"
+ * 
+ *  ClientUDP est le client de base à lancer pour se connecter au chat
+ *  celui-ci demande un host ainsi qu'un numéro de port
+ *  
+ * 
+ * @author Boscher Enzo, Bonhomme Alexandre
+ * @version 1.0
+ */
+
 
 public class ClientUDP {
+    /**
+     * 
+     * Main method
+     * 
+     *  
+     *      - Demande à l'utilisateur son pseudo
+     *      - Lance le thread ClientReceiver chargé d'être en attente des messages en 
+     *         provenance de l'adresse multicast et les afficher à l'utilisateur
+     *      - Envoie un message à tous le monde indiquant qu'il s'est connecté au chat
+     *      - Se met indéfiniment en attente de message en provenance de l'utilisateur
+     *        sur la sortie standard et les envois aux autres utilisateurs formatés avec 
+     *        son pseudo
+     *      - Indique à tous le monde lorsqu'il quitte le chat
+     * 
+     * 
+     *  @param host est une adresse IPv4, ne peut pas être "localhost" et doit 
+     *  être contenu entre 224.0.0.0 et 239.255.255.255
+     *  @param port est le port associé à l'adresse donnée
+     */
     public static void main(String[] args) throws IOException {
         if (args.length != 2) {
-            System.out.println("Usage: java ClientUDP <ServerUDP host> <ServerUDP port>");
+            System.out.println("Usage: java ClientUDP <host> <port>\nif using make: make run host=<host> port=<port>");
             System.exit(1);
           }
         //asking the user his username

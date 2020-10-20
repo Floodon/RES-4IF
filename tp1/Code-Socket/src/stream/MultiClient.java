@@ -60,6 +60,7 @@ public class MultiClient
 			  }
 
     		while (true) {
+				// réception du message
 				  String line = socIn.readLine();
 					//Affiche à tous le monde la déconnexion d'un utilisateur
 				  if(line == null) {
@@ -71,6 +72,7 @@ public class MultiClient
 					  }
 					  break;
 				  }
+				// Envoi du message à tous les clients
 				to_send = pseudo+": "+line;
 				// Sauvegarde le message
 				sauvegarder(to_send);

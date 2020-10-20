@@ -1,28 +1,34 @@
-/***
- * EchoServer
- * Example of a TCP server
- * Date: 10/01/04
- * Authors:
- */
-
 package stream;
-
-
 import java.net.*;
 import java.io.*;
+
+/**
+ * Exemple d'un serveur supportant un chat utilisant des connexions de type TCP
+ * 
+ *  Le MultiServeur est la classe à lancer pour lancer le serveur
+ * 
+ * @author Boscher Enzo, Bonhomme Alexandre
+ * @version 1.0
+ */
 
 public class MultiServer {
   
  	/**
-  	* main method
-	* @param EchoServer port
+	* main method
+	* Créer le fichier d'historique s'il n'existe pas, puis se met en attente de connexion.
+	* Lorsqu'une connexion est demandée, le serveur créé un thread MultiClient par client qui gère l'attente
+	* de messages en provenance du client.
+	* 
+	* Cette classe reste en attente de nouvelles connexions
+	*
+	* @param port
   	* 
   	**/
        public static void main(String args[]){ 
 		ServerSocket listenSocket;
         
   	if (args.length != 1) {
-          System.out.println("Usage: java EchoServer <EchoServer port>");
+          System.out.println("Usage: java MultiServer <port>\nif using make: make run_server port=<port>");
           System.exit(1);
   	}
 	try {
@@ -39,8 +45,6 @@ public class MultiServer {
 			ct.start();
 		}
         } catch (Exception e) {
-			//fos.flush();
-			//fos.close();
 			e.printStackTrace();
         }
       }
