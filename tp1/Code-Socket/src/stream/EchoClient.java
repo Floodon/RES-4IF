@@ -34,7 +34,6 @@ public class EchoClient {
         Socket echoSocket = null;
         PrintStream socOut = null;
         BufferedReader stdIn = null;
-        BufferedReader socIn = null;
 
         if (args.length != 2) {
           System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>\nif using make: make run_client host=<host> port=<port>");
@@ -47,9 +46,7 @@ public class EchoClient {
           String pseudo = reader.nextLine();
 
       	    // creation socket ==> connexion
-      	    echoSocket = new Socket(args[0], Integer.valueOf(args[1]).intValue());
-	    socIn = new BufferedReader(
-	    		          new InputStreamReader(echoSocket.getInputStream()));    
+      	    echoSocket = new Socket(args[0], Integer.valueOf(args[1]).intValue()); 
 	    socOut= new PrintStream(echoSocket.getOutputStream());
       stdIn = new BufferedReader(new InputStreamReader(System.in));
       System.out.println("Succesfully connected as "+pseudo);
@@ -76,7 +73,6 @@ public class EchoClient {
           socOut.println(line);
         }
       socOut.close();
-      socIn.close();
       stdIn.close();
       echoSocket.close();
     }
