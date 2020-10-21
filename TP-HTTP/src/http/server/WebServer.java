@@ -6,16 +6,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Exemple d'un serveur HTTP supportant toutes les méthodes HTTP
+ * Exemple d'un serveur HTTP supportant toutes les methodes HTTP
  * 
  * @author Boscher Enzo, Bonhomme Alexandre
  * @version 1.0
@@ -24,8 +22,8 @@ public class WebServer {
 
 /**
 	 * Lance le serveur sur le port 3000 Entre dans une boucle infinie dans
-	 * l'attente d'une connection Lors d'une connection lit les donnée envoyées En
-	 * focntion du type de requête fais appel à la méthode adaptée
+	 * l'attente d'une connection Lors d'une connection lit les donnee envoyees En
+	 * focntion du type de requete fais appel a la methode adaptee
 	 * 
 	 * @see GetRequest
 	 * @see HeadRequest
@@ -131,16 +129,16 @@ public class WebServer {
 	}
 
 /**
-	 * Méthode parsant le string requête en une instance de la classe HttpRequest
-	 * Créé et renvoie une instance de la classe HttpRequest
+	 * Methode parsant le string requete en une instance de la classe HttpRequest
+	 * Cree et renvoie une instance de la classe HttpRequest
 	 * 
-	 * @param request la requete HTTP reçue
-	 * @return une instance de la classe HttpRequest correspondant à la requête HTTP
-	 *         reçue
+	 * @param request la requete HTTP recue
+	 * @return une instance de la classe HttpRequest correspondant a la requete HTTP
+	 *         recue
 	 */
 
 	protected HttpRequest parseRequest(String request) {
-		String[] splited = request.split("[ \n]"); // Enleve les espaces et les retours à la ligne
+		String[] splited = request.split("[ \n]"); // Enleve les espaces et les retours a la ligne
 		HttpRequest http = new HttpRequest();
 		http.requestType = splited[0];
 		http.ressourceRequested = splited[1];
@@ -154,12 +152,12 @@ public class WebServer {
 	}
 
 	/**
-	 * Méthode renvoyant pour une extension de fichier le type de fichier associé
-	 * Renvoie le type de fichier associé si l'extension est reconnue Renvoie le
+	 * Methode renvoyant pour une extension de fichier le type de fichier associe
+	 * Renvoie le type de fichier associe si l'extension est reconnue Renvoie le
 	 * type "application/octet-stream" si l'extension n'est pas reconnue
 	 * 
 	 * @param extension l'extension du fichier
-	 * @return un String décrivant le type de ressource adapté au format HTTP
+	 * @return un String decrivant le type de ressource adapte au format HTTP
 	 */
 
 	protected String contentType(String extension) {
@@ -170,7 +168,7 @@ public class WebServer {
 			else if (extension.equals("mp3"))
 				type = "audio/mpeg";
 			else if (extension.equals("mp4"))
-				type = "vidéo/mp4";
+				type = "vidï¿½o/mp4";
 			else if (extension.equals("avi"))
 				type = "video/x-msvideo";
 			else if (extension.equals("css"))
@@ -203,19 +201,19 @@ public class WebServer {
 	}
 
 	/**
-	 * Méthode gérant la méthode HTTP GET. 
-	 * Verifie si le fichier est un executable (app?), si c'est le cas, vérifie que la requête est bien formulée.
-	 * Si c'est le cas execute l'executable avec les paramètres fournis et renvoie le résultat dans la réponse HTTP avec le code HTTP200
+	 * Methode gerant la methode HTTP GET. 
+	 * Verifie si le fichier est un executable (app?), si c'est le cas, verifie que la requete est bien formulee.
+	 * Si c'est le cas execute l'executable avec les parametres fournis et renvoie le resultat dans la reponse HTTP avec le code HTTP 200
 	 * Sinon renvoie un code d'erreur HTTP 400 
-	 * Si le fichier n'est pas un executable, essaie d'accéder au fichier demandé Si le
-	 * fichier existe la réponse aura pour code HTTP 200 Si le fichier n'existe pas
-	 * la réponse aura pour code HTTP 404 Si le fichier existe la réponse est
-	 * constituée d'un HEADER et a pour BODY le fichier demandé Si le fichier
-	 * n'existe pas la réponse est constituée d'un HEADER et a pour BODY le fichier
+	 * Si le fichier n'est pas un executable, essaie d'acceder au fichier demande Si le
+	 * fichier existe la reponse aura pour code HTTP 200 Si le fichier n'existe pas
+	 * la reponse aura pour code HTTP 404 Si le fichier existe la reponse est
+	 * constituee d'un HEADER et a pour BODY le fichier demande Si le fichier
+	 * n'existe pas la reponse est constituee d'un HEADER et a pour BODY le fichier
 	 * error.html En cas d'erreur essaie de renvoyer le code d'erreur HTTP 500
 	 * 
-	 * @param http La requête http reçue
-	 * @param out  Le flux d'écriture binaire vers le client
+	 * @param http La requete http recue
+	 * @param out  Le flux d'ecriture binaire vers le client
 	 */
 
 	protected void GetRequest(HttpRequest http, BufferedOutputStream out) {
@@ -248,7 +246,7 @@ public class WebServer {
 					InputStreamReader reader = new InputStreamReader(process.getInputStream());
 					BufferedReader br = new BufferedReader(reader);
 					String line = "";
-					String result = "";
+					String result = "";	
 					while ((line = br.readLine()) != null) {
 						result += line;
 					}
@@ -307,14 +305,14 @@ public class WebServer {
 	}
 
 	/**
-	 * Méthode gérant la méthode HTTP HEAD. Essaie d'accéder au fichier demandé Si
-	 * le fichier existe la réponse aura pour code HTTP 200 Si le fichier n'existe
-	 * pas la réponse aura pour code HTTP 404 Renvoie une réponse contenant le
-	 * HEADER qu'aurait reçu le même appel avec la méthode GET La réponse n'a pas de
+	 * Methode gerant la methode HTTP HEAD. Essaie d'acceder au fichier demande Si
+	 * le fichier existe la reponse aura pour code HTTP 200 Si le fichier n'existe
+	 * pas la reponse aura pour code HTTP 404 Renvoie une reponse contenant le
+	 * HEADER qu'aurait recu le meme appel avec la methode GET La reponse n'a pas de
 	 * BODY En cas d'erreur essaie de renvoyer le code d'erreur HTTP 500
 	 * 
-	 * @param http La requête http reçue
-	 * @param out  Le flux d'écriture binaire vers le client
+	 * @param http La requete http recue
+	 * @param out  Le flux d'ecriture binaire vers le client
 	 */
 
 	protected void HeadRequest(HttpRequest http, BufferedOutputStream out) {
@@ -355,13 +353,13 @@ public class WebServer {
 	}
 
 	/**
-	 * Méthode gérant la méthode HTTP PUT. Essaie d'ajouter le fichier envoyé Si le
-	 * fichier existait déja et a été écrasé, renvoie le code HTTP 204 Si le fichier
-	 * n'existait pas et a été créé, renvoie le code HTTP 201 En cas d'erreur essaie
+	 * Methode gerant la methode HTTP PUT. Essaie d'ajouter le fichier envoye Si le
+	 * fichier existait deja et a ete ecrase, renvoie le code HTTP 204 Si le fichier
+	 * n'existait pas et a ete cree, renvoie le code HTTP 201 En cas d'erreur essaie
 	 * de renvoyer le code d'erreur HTTP 500
 	 * 
-	 * @param http La requête http reçue
-	 * @param out  Le flux d'écriture binaire vers le client
+	 * @param http La requete http recue
+	 * @param out  Le flux d'ecriture binaire vers le client
 	 */
 
 	protected void PutRequest(HttpRequest http, BufferedOutputStream out) {
@@ -395,14 +393,14 @@ public class WebServer {
 	}
 
 	/**
-	 * Méthode gérant la méthode HTTP POST. Essaie de trouver le fichier auquel
-	 * ajouter des informations Si le fichier est trouvé et que le contenu a bien
-	 * été ajouté renvoie le code HTTP 200 Si le fichier n'existait pas et a été
-	 * créé, renvoie le code HTTP 201 En cas d'erreur essaie de renvoyer le code
+	 * Methode gerant la methode HTTP POST. Essaie de trouver le fichier auquel
+	 * ajouter des informations Si le fichier est trouve et que le contenu a bien
+	 * ete ajoute renvoie le code HTTP 200 Si le fichier n'existait pas et a ete
+	 * cree, renvoie le code HTTP 201 En cas d'erreur essaie de renvoyer le code
 	 * d'erreur HTTP 500
 	 * 
-	 * @param http La requête http reçue
-	 * @param out  Le flux d'écriture binaire vers le client
+	 * @param http La requete http recue
+	 * @param out  Le flux d'ecriture binaire vers le client
 	 */
 
 	protected void PostRequest(HttpRequest http, BufferedOutputStream out) {
@@ -436,15 +434,15 @@ public class WebServer {
 	}
 
 	/**
-	 * Méthode gérant la méthode HTTP DELETE. Essaie de trouver le fichier à
-	 * supprimer dans le répertoire doc et de le supprimer En cas de succès renvoie
-	 * le code HTTP 200 En cas d'échec si le fichier n'a pas pu être supprimé
-	 * renvoie le code d'erreur HTTP 403 En cas d'échec si le fichier n'a été trouvé
+	 * Methode gerant la methode HTTP DELETE. Essaie de trouver le fichier a
+	 * supprimer dans le repertoire doc et de le supprimer En cas de succes renvoie
+	 * le code HTTP 200 En cas d'echec si le fichier n'a pas pu etre supprime
+	 * renvoie le code d'erreur HTTP 403 En cas d'echec si le fichier n'a ete trouve
 	 * renvoie le code d'erreur HTTP 404 En cas d'erreur essaie de renvoyer le code
 	 * d'erreur HTTP 500
 	 * 
-	 * @param http La requête http reçue
-	 * @param out  Le flux d'écriture binaire vers le client
+	 * @param http La requete http recue
+	 * @param out  Le flux d'ecriture binaire vers le client
 	 */
 
 	protected void DeleteRequest(HttpRequest http, BufferedOutputStream out) {
@@ -478,11 +476,11 @@ public class WebServer {
 	}
 
 	/**
-	 * Méthode gérant les méthodes HTTP non implémentées. Renvoie le code d'erreur
-	 * http 501 En cas d'erreur essaie de renvoyer le code d'erreur 500
+	 * Methode gerant les methodes HTTP non implementees. Renvoie le code d'erreur
+	 * HTTP 501 En cas d'erreur essaie de renvoyer le code d'erreur 500
 	 * 
-	 * @param http La requête http reçue
-	 * @param out  Le flux d'écriture binaire vers le client
+	 * @param http La requete http recue
+	 * @param out  Le flux d'ecriture binaire vers le client
 	 */
 
 	protected void NotImplemented(HttpRequest http, BufferedOutputStream out) {
@@ -508,7 +506,7 @@ public class WebServer {
 	/**
 	 * Lance l'application.
 	 * 
-	 * @param args les paramètres sont inutilisés.
+	 * @param args les parametres sont inutilises.
 	 */
 
 	public static void main(String args[]) {

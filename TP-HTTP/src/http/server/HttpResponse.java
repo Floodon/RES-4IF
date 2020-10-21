@@ -1,7 +1,7 @@
 package http.server;
 
 /**
- * Classe représentant le HEADER d'une réponse HTTP
+ * Classe representant le HEADER d'une reponse HTTP
  * 
  */
 
@@ -18,10 +18,10 @@ public class HttpResponse {
     	server = "LocalHost";
     }
 	/**
-	 * Méthode renvoyant un string correspondant au HEADER de la réponse HTTP
-	 * Renvoie le string contenant les informations du HEADER de la réponse HTTP
+	 * Methode renvoyant un string correspondant au HEADER de la reponse HTTP
+	 * Renvoie le string contenant les informations du HEADER de la reponse HTTP
 	 * 
-	 * @return Un string représentant le HEADER de la réponse HTTP
+	 * @return Un string representant le HEADER de la reponse HTTP
 	 */
     public String stringify(){
     	String res ="";

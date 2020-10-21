@@ -1,7 +1,7 @@
 package http.server;
 
 /**
- * Classe représentant une requête HTTP
+ * Classe representant une requete HTTP
  * 
  */
 
