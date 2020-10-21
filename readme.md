@@ -22,6 +22,9 @@ ________________________________
 
 tp2 - HTTP Server
 
+Compilation: make
+
+Exécution: make run
 
 ________________________________
 
